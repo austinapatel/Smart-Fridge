@@ -264,6 +264,7 @@ k.set_contents_from_filename(textpath, cb=percent_cb, num_cb=10)
 print('done')
 print(str(options))
 
+#
 
 pause()
 camera.stop_preview()
