@@ -15,14 +15,14 @@ CALS = ('There are ' + str(nutrientdata['ENERC_KCAL']) + " calories in " + str(f
 CALS = CALS.lower().capitalize()
 print(CALS)
 
-PRTN = ('There are ' + str(nutrientdata['PROCNT']) + " grams of protein in in " + str(food) + ".")
+PRTN = ('There are ' + str(nutrientdata['PROCNT']) + " grams of protein in " + str(food) + ".")
 PRTN = PRTN.lower().capitalize()
 print(PRTN)
 
-CALS = ('There are ' + str(nutrientdata['FAT']) + " calories in " + str(food) + ".")
-CALS = CALS.lower().capitalize()
-print(CALS)
+FaT = ('There are ' + str(nutrientdata['FAT']) + " grams of fat in " + str(food) + ".")
+FaT = FaT.lower().capitalize()
+print(FaT)
 
-CALS = ('There are ' + str(nutrientdata['CHOCD']) + " calories in " + str(food) + ".")
-CALS = CALS.lower().capitalize()
-print(CALS)
+CARBS = ('There are ' + str(nutrientdata['CHOCDF']) + " grams of carbohydrates in " + str(food) + ".")
+CARBS = CARBS.lower().capitalize()
+print(CARBS)
