@@ -129,6 +129,8 @@ for i in range(len(names)):
                 CARBS = CARBS.lower().capitalize()
                 print(CARBS)
 
+                descriptions.append({o: {'calories': CALS, 'protein': PRTN, 'fat': FaT, 'carbs': CARBS}})
+
                 if 'CA' in nutrientdata:
                     CLCM = ('There are ' + str(nutrientdata['CA']) + " milligrams of Calcium in " + str(food) + ".")
                     CLCM = CLCM.lower().capitalize()
@@ -224,7 +226,7 @@ for i in range(len(names)):
                     VitK = VitK.lower().capitalize()
                     print(VitK)
 
-                descriptions.append({o : {'calories' : CALS, 'protein' : PRTN, 'fat': FaT, 'carbs' : CARBS}})
+
 
             except Exception as e:
                 pass
