@@ -290,3 +290,4 @@ except KeyboardInterrupt as e:
     pass
 
 camera.stop_preview()
+GPIO.output(ledpin, GPIO.LOW)
