@@ -11,4 +11,18 @@ fooddata = json.loads(response.content.decode("utf-8"))
 nutrientdata = fooddata["parsed"][0]["food"]["nutrients"]
 food = fooddata["parsed"][0]["food"]["label"]
 
-print('There are', nutrientdata['ENERC_KCAL'], "calories in", food)
+CALS = ('There are ' + str(nutrientdata['ENERC_KCAL']) + " calories in " + str(food) + ".")
+CALS = CALS.lower().capitalize()
+print(CALS)
+
+PRTN = ('There are ' + str(nutrientdata['PROCNT']) + " grams of protein in in " + str(food) + ".")
+PRTN = PRTN.lower().capitalize()
+print(PRTN)
+
+CALS = ('There are ' + str(nutrientdata['FAT']) + " calories in " + str(food) + ".")
+CALS = CALS.lower().capitalize()
+print(CALS)
+
+CALS = ('There are ' + str(nutrientdata['CHOCD']) + " calories in " + str(food) + ".")
+CALS = CALS.lower().capitalize()
+print(CALS)
