@@ -113,22 +113,23 @@ for i in range(len(names)):
                 nutrientdata = fooddata["parsed"][0]["food"]["nutrients"]
                 food = fooddata["parsed"][0]["food"]["label"]
 
-                CALS = ('There are ' + str(nutrientdata['ENERC_KCAL']) + " calories in " + str(food) + ".")
+                CALS = nutrientdata['ENERC_KCAL']
                 CALS = CALS.lower().capitalize()
                 print(CALS)
 
-                PRTN = ('There are ' + str(nutrientdata['PROCNT']) + " grams of protein in " + str(food) + ".")
+                PRTN = nutrientdata['PROCNT']
                 PRTN = PRTN.lower().capitalize()
                 print(PRTN)
 
-                FaT = ('There are ' + str(nutrientdata['FAT']) + " grams of fat in " + str(food) + ".")
+                FaT = nutrientdata['FAT']
                 FaT = FaT.lower().capitalize()
                 print(FaT)
 
-                CARBS = ('There are ' + str(nutrientdata['CHOCDF']) + " grams of carbohydrates in " + str(food) + ".")
+                CARBS = nutrientdata['CHOCDF']
                 CARBS = CARBS.lower().capitalize()
                 print(CARBS)
 
+                print('ADDED HERE!!!!!!!!!!!!')
                 descriptions.append({o: {'calories': CALS, 'protein': PRTN, 'fat': FaT, 'carbs': CARBS}})
 
                 if 'CA' in nutrientdata:
@@ -231,7 +232,9 @@ for i in range(len(names)):
             except Exception as e:
                 pass
 
-print(descriptions)
+            break
+
+print(json.dumps(descriptions))
 
 
 # save data to file
