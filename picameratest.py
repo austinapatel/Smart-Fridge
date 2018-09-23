@@ -118,19 +118,15 @@ for i in range(len(names)):
             food = fooddata["parsed"][0]["food"]["label"]
 
             CALS = nutrientdata['ENERC_KCAL']
-            CALS = CALS.lower().capitalize()
             print(CALS)
 
             PRTN = nutrientdata['PROCNT']
-            PRTN = PRTN.lower().capitalize()
             print(PRTN)
 
             FaT = nutrientdata['FAT']
-            FaT = FaT.lower().capitalize()
             print(FaT)
 
             CARBS = nutrientdata['CHOCDF']
-            CARBS = CARBS.lower().capitalize()
             print(CARBS)
 
             print('ADDED HERE!!!!!!!!!!!!')
