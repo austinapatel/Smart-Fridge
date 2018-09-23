@@ -1,10 +1,6 @@
 from picamera import PiCamera
 from time import sleep
 from signal import pause
-from gpiozero import Button
-from gpiozero import LED
-from aiy.pins import LED_1
-from aiy.pins import PIN_D
 
 camera = PiCamera()
 
