@@ -22,8 +22,8 @@ def get_items(d):
 
 
 def get_data():
-    AWS_ACCESS_KEY_ID = 'AKIAIDYKVAQ2WHYAHJ6Q'
-    AWS_SECRET_ACCESS_KEY = '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'
+    AWS_ACCESS_KEY_ID = '-----------'
+    AWS_SECRET_ACCESS_KEY = '-------------'
 
     bucket_name = 'smart-fridge-basehacks'
 
