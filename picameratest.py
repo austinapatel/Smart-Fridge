@@ -236,9 +236,20 @@ for i in range(len(names)):
         pass
 
 
+new_options = []
+
+for option in options:
+    for o in option:
+        if not (o == 'produce' or o == 'fruit' or o == 'food' or o == 'plant' or o == 'vegetable' or o == 'potato and tomato genus'):
+            new_options.append(o)
+            break
+
+print(new_options)
+
+
 # save data to file
 f = open(textpath, "w")
-f.write(str(image_label_list))
+f.write(str(new_options))
 f.close()
 
 # upload to s3 ------------------------------------------
@@ -261,10 +272,9 @@ def percent_cb(complete, total):
 k = Key(bucket)
 k.key = textfilename
 k.set_contents_from_filename(textpath, cb=percent_cb, num_cb=10)
-print('done')
-print(str(options))
+# print(str(options))
 
-#
+print('done')
 
 pause()
 camera.stop_preview()
