@@ -190,7 +190,8 @@ if 'PTSM' in nutrientdata:
 
 # save data to file
 f = open(textpath, "w")
-f.write("calories" + CALS)
+f.write("calories: " + CALS + " & food type: " + linkfood)
+f.close()
 
 # upload to s3 ------------------------------------------
 
