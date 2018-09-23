@@ -62,6 +62,7 @@ for label in labels:
 import requests, json
 
 linkfood = labels[2].description.lower()
+linkfood = 'apple'
 appid = "01cf97dd"
 apikey = "b920660a822e1fddc5b10bdf50c890cf"
 test = "https://api.edamam.com/api/food-database/parser?ingr=apple&app_id=01cf97dd&app_key=b920660a822e1fddc5b10bdf50c890cf"
@@ -69,7 +70,9 @@ test = "https://api.edamam.com/api/food-database/parser?ingr=apple&app_id=01cf97
 response = requests.get("https://api.edamam.com/api/food-database/parser?ingr={}&app_id={}&app_key={}".format(linkfood, appid, apikey))
 (response.content.decode("utf-8"))
 
-fooddata = json.loads(response.content.decode("utf-8"))
+content = response.content.decode("utf-8")
+fooddata = json.loads(content)
+
 nutrientdata = fooddata["parsed"][0]["food"]["nutrients"]
 food = fooddata["parsed"][0]["food"]["label"]
 
