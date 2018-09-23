@@ -1,6 +1,7 @@
 from picamera import PiCamera
 from time import sleep
 import io
+from random import random
 import os
 
 from signal import pause
@@ -272,7 +273,7 @@ try:
         print('done with update')
 
         GPIO.output(ledpin, GPIO.HIGH)
-        sleep(3)
+        sleep(3 + int(random() * 4))
         GPIO.output(ledpin, GPIO.LOW)
 
 except KeyboardInterrupt as e:
