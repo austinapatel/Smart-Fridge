@@ -106,7 +106,6 @@ try:
 
 
                     linkfood = o
-                    # descriptions.append(linkfood)
 
                     appid = "01cf97dd"
                     apikey = "b920660a822e1fddc5b10bdf50c890cf"
