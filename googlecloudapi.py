@@ -9,7 +9,7 @@ from google.cloud.vision import types
 client = vision.ImageAnnotatorClient.from_service_account_json('Smart Fridge.json')
 
 # The name of the image file to annotate
-file_name = os.path.join(os.path.dirname(__file__),'Apple.jpg')
+file_name = os.path.join(os.path.dirname(__file__),'Orange.jpg')
 
 # Loads the image into memory
 with io.open(file_name, 'rb') as image_file:

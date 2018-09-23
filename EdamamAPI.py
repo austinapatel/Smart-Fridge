@@ -1,7 +1,7 @@
 import requests, json
-#from googlecloudapi import *
+from googlecloudapi import *
 
-linkfood = input("What food is it bruhhhhhhh? This is gonna be an imported value from googlecloudapi later but for now...").lower()
+linkfood = labels[2].description.lower()
 appid = "01cf97dd"
 apikey = "b920660a822e1fddc5b10bdf50c890cf"
 test = "https://api.edamam.com/api/food-database/parser?ingr=apple&app_id=01cf97dd&app_key=b920660a822e1fddc5b10bdf50c890cf"
