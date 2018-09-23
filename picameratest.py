@@ -120,6 +120,9 @@ try:
                     content = response.content.decode("utf-8")
                     fooddata = json.loads(content)
 
+                    if len(fooddata['parsed']) < 0:
+                        continue
+
                     nutrientdata = fooddata["parsed"][0]["food"]["nutrients"]
                     food = fooddata["parsed"][0]["food"]["label"]
 
