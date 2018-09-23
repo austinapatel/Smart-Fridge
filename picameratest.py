@@ -100,7 +100,7 @@ for i in range(len(names)):
 
 
             linkfood = o
-            descriptions.append(linkfood)
+            # descriptions.append(linkfood)
 
             appid = "01cf97dd"
             apikey = "b920660a822e1fddc5b10bdf50c890cf"
