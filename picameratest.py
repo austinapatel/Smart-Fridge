@@ -1,6 +1,22 @@
 from picamera import PiCamera
 from time import sleep
+import io
+import os
+
 from signal import pause
+
+
+# Imports the Google Cloud client library
+from google.cloud import vision
+from google.cloud.vision import types
+from signal import pause
+import requests, json
+
+import boto.s3
+import sys
+from boto.s3.key import Key
+
+
 
 camera = PiCamera()
 
@@ -25,16 +41,11 @@ sleep(5)
 # pause()
 
 # When the button is released, call the led.off() function (turn the led off)
-camera.stop_preview()
+
 
 # cloud api ------------------------------------------
 
-import io
-import os
 
-# Imports the Google Cloud client library
-from google.cloud import vision
-from google.cloud.vision import types
 
 # Instantiates a client
 client = vision.ImageAnnotatorClient.from_service_account_json('Smart Fridge.json')
@@ -59,7 +70,6 @@ for label in labels:
 
 
 # get nutrition facts ------------------------------------------
-import requests, json
 
 linkfood = labels[2].description.lower()
 linkfood = 'banana'
@@ -195,9 +205,7 @@ f.close()
 
 # upload to s3 ------------------------------------------
 
-import boto.s3
-import sys
-from boto.s3.key import Key
+
 
 AWS_ACCESS_KEY_ID = open('AWS_ACCESS_KEY_ID.txt').read()
 AWS_SECRET_ACCESS_KEY = open('AWS_SECRET_ACCESS_KEY.txt').read()
@@ -219,3 +227,7 @@ k = Key(bucket)
 k.key = textfilename
 k.set_contents_from_filename(textpath, cb=percent_cb, num_cb=10)
 print('done')
+
+
+pause()
+camera.stop_preview()
