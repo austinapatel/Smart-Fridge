@@ -1,3 +1,4 @@
+import boto3
 import boto
 import boto.s3
 import sys
@@ -11,9 +12,6 @@ bucket_name = 'smart-fridge-basehacks'
 conn = boto.connect_s3(AWS_ACCESS_KEY_ID,
         AWS_SECRET_ACCESS_KEY)
 
-
-bucket = conn.get_bucket(bucket_name)
-
 testfile = "image.jpg"
 print('Uploading %s to Amazon S3 bucket %s' % (testfile, bucket_name))
 
@@ -21,7 +19,29 @@ def percent_cb(complete, total):
     sys.stdout.write('.')
     sys.stdout.flush()
 
-# add new file
-k = Key(bucket)
-k.key = testfile
-k.set_contents_from_filename(testfile, cb=percent_cb, num_cb=10)
+bucket = conn.get_bucket(bucket_name)
+
+# # add new file
+# k = Key(bucket)
+# k.key = testfile
+# k.set_contents_from_filename(testfile, cb=percent_cb, num_cb=10)
+
+
+s3 = boto3.resource('s3')
+bucket = s3.Bucket(bucket_name)
+
+for obj in bucket.objects.all():
+    key = obj.key
+    body = obj.get()['Body'].read().decode("utf-8")
+    # print(body)
+
+    import base64
+
+    imgdata = base64.b64decode(body)
+    filename = 'some_image.jpg'  # I assume you have a way of picking unique filenames
+    with open(filename, 'wb') as f:
+        f.write(imgdata)
+#
+# key = obj.key
+# body = obj.get()['Body'].read()
+# print(body)
