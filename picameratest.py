@@ -11,9 +11,14 @@ camera = PiCamera()
 camera.start_preview()
 sleep(5)
 
-filename = 'content.txt'
-path = '/home/pi/Desktop/' + filename
-camera.capture(path)
+textfilename = 'content.txt'
+imagefilename = 'image.jpg'
+base = '/home/pi/Desktop/'
+imagepath = base + imagefilename
+textpath = base + textfilename
+
+
+camera.capture(imagepath)
 sleep(5)
 
 # Wait for the user to kill the example.
@@ -35,7 +40,8 @@ from google.cloud.vision import types
 client = vision.ImageAnnotatorClient.from_service_account_json('Smart Fridge.json')
 
 # The name of the image file to annotate
-file_name = os.path.join(os.path.dirname(__file__),'Apple.jpg')
+# file_name = os.path.join(os.path.dirname(__file__),'Apple.jpg')
+file_name = imagepath
 
 # Loads the image into memory
 with io.open(file_name, 'rb') as image_file:
@@ -44,7 +50,7 @@ with io.open(file_name, 'rb') as image_file:
 image = types.Image(content=content)
 
 # Performs label detection on the image file
-response = client.label_detection(image = image)
+response = client.label_detection(image=image)
 labels = response.label_annotations
 
 print('Labels:')
@@ -180,7 +186,7 @@ if 'PTSM' in nutrientdata:
 
 
 # save data to file
-f = open(path, "w")
+f = open(textpath, "w")
 f.write("calories" + CALS)
 
 # upload to s3 ------------------------------------------
@@ -198,7 +204,7 @@ conn = boto.connect_s3(AWS_ACCESS_KEY_ID,
 
 bucket = conn.get_bucket(bucket_name)
 
-print('Uploading %s to Amazon S3 bucket %s' % (path, bucket_name))
+print('Uploading %s to Amazon S3 bucket %s' % (textpath, bucket_name))
 
 def percent_cb(complete, total):
     sys.stdout.write('.')
@@ -206,6 +212,6 @@ def percent_cb(complete, total):
 
 # add new file
 k = Key(bucket)
-k.key = filename
-k.set_contents_from_filename(path, cb=percent_cb, num_cb=10)
+k.key = textfilename
+k.set_contents_from_filename(textpath, cb=percent_cb, num_cb=10)
 print('done')
