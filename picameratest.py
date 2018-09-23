@@ -62,11 +62,11 @@ try:
             cropped_image.show()
 
 
-        crop(imagefilename, (0, 0, 230, 170), 'top_left.jpg')
-        crop(imagefilename, (0, 260, 185, 480), 'bottom_left.jpg')
-        crop(imagefilename, (200, 200, 350, 370), 'middle.jpg')
-        crop(imagefilename, (370, 270, 640, 480), 'bottom_right.jpg')
-        crop(imagefilename, (310, 100, 500, 300), 'top_right.jpg')
+        crop(imagepath, (0, 0, 230, 170), 'top_left.jpg')
+        crop(imagepath, (0, 260, 185, 480), 'bottom_left.jpg')
+        crop(imagepath, (200, 200, 350, 370), 'middle.jpg')
+        crop(imagepath, (370, 270, 640, 480), 'bottom_right.jpg')
+        crop(imagepath, (310, 100, 500, 300), 'top_right.jpg')
 
         names = ['top_left', 'bottom_left', 'middle', 'bottom_right', 'top_right']
 
