@@ -68,7 +68,7 @@ names = ['top_left', 'bottom_left', 'middle', 'bottom_right', 'top_right']
 # Instantiates a client
 client = vision.ImageAnnotatorClient.from_service_account_json('Smart Fridge.json')
 
-labels = []
+image_label_list = []
 
 for i in range(len(names)):
     name = names[i]
@@ -98,7 +98,7 @@ for i in range(len(names)):
 
     linkfood = labels[2].description.lower()
 
-    labels.append(linkfood)
+    image_label_list.append(linkfood)
 
     appid = "01cf97dd"
     apikey = "b920660a822e1fddc5b10bdf50c890cf"
@@ -233,7 +233,7 @@ for i in range(len(names)):
 
 # save data to file
 f = open(textpath, "w")
-f.write(str(labels))
+f.write(str(image_label_list))
 f.close()
 
 # upload to s3 ------------------------------------------
