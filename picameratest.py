@@ -121,7 +121,11 @@ try:
                     if not content:
                         continue
 
-                    fooddata = json.loads(content)
+                    try:
+
+                        fooddata = json.loads(content)
+                    except Exception as e:
+                        continue
 
                     if len(fooddata['parsed']) == 0:
                         continue
