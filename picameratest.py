@@ -13,9 +13,10 @@ camera = PiCamera()
 
 # When the button is pressed, call the led.on() function (turn the led on)
 camera.start_preview()
-sleep(10)
-# When the button is released, call the led.off() function (turn the led off)
-camera.stop_preview()
 
 # Wait for the user to kill the example.
 pause()
+
+# When the button is released, call the led.off() function (turn the led off)
+camera.stop_preview()
+
