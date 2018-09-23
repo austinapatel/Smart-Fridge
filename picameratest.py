@@ -91,13 +91,14 @@ for i in range(len(names)):
     labels = response.label_annotations
 
     print('Labels: for', str(i))
-    for o in labels:
+    for c in labels:
+        o = c.description
         if not (o == 'produce' or o == 'fruit' or o == 'food' or o == 'plant' or o == 'vegetable' or o == 'potato and tomato genus'):
             try:
                 # get nutrition facts ------------------------------------------
 
                 linkfood = o
-                descriptions.append(o)
+                descriptions.append(linkfood)
 
                 appid = "01cf97dd"
                 apikey = "b920660a822e1fddc5b10bdf50c890cf"
@@ -131,7 +132,7 @@ for i in range(len(names)):
                 print(CARBS)
 
                 print('ADDED HERE!!!!!!!!!!!!')
-                # descriptions.append({o: {'calories': CALS, 'protein': PRTN, 'fat': FaT, 'carbs': CARBS}})
+                descriptions.append({linkfood: {'calories': CALS, 'protein': PRTN, 'fat': FaT, 'carbs': CARBS}})
 
                 if 'CA' in nutrientdata:
                     CLCM = ('There are ' + str(nutrientdata['CA']) + " milligrams of Calcium in " + str(food) + ".")
