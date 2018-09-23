@@ -6,6 +6,13 @@ import os
 from signal import pause
 from PIL import Image
 
+import RPi.GPIO as GPIO
+ledpin = 15
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+GPIO.setup(ledpin,GPIO.OUT)
+GPIO.output(15,GPIO.LOW)
+
 import json
 # Imports the Google Cloud client library
 from google.cloud import vision
@@ -24,11 +31,10 @@ camera = PiCamera()
 
 # When the button is pressed, call the led.on() function (turn the led on)
 camera.start_preview()
+sleep(3)
 
 try:
     while True:
-        sleep(3)
-
         textfilename = 'content.txt'
         imagefilename = 'image.jpg'
         base = '/home/pi/Desktop/'
@@ -264,6 +270,10 @@ try:
         # print(str(options))
 
         print('done with update')
+
+        GPIO.output(ledpin, GPIO.HIGH)
+        sleep(3)
+        GPIO.output(ledpin, GPIO.LOW)
 
 except KeyboardInterrupt as e:
     pass

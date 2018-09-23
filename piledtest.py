@@ -7,4 +7,4 @@ print("LED on")
 GPIO.output(15,GPIO.HIGH)
 time.sleep(5)
 print("LED off")
-GPIO.output(15,GPIO.LOW) #
+GPIO.output(15,GPIO.LOW)
