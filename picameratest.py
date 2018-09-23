@@ -262,7 +262,7 @@ k = Key(bucket)
 k.key = textfilename
 k.set_contents_from_filename(textpath, cb=percent_cb, num_cb=10)
 print('done')
-print(str(image_label_list))
+print(str(options))
 
 
 pause()
