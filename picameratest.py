@@ -69,6 +69,7 @@ names = ['top_left', 'bottom_left', 'middle', 'bottom_right', 'top_right']
 client = vision.ImageAnnotatorClient.from_service_account_json('Smart Fridge.json')
 
 image_label_list = []
+options = []
 
 for i in range(len(names)):
     name = names[i]
@@ -90,8 +91,14 @@ for i in range(len(names)):
     labels = response.label_annotations
 
     print('Labels: for', str(i))
+    descriptions = []
     for label in labels:
         print(label.description)
+        descriptions.append(label.description)
+
+    options.append(descriptions)
+
+
 
     try:
         # get nutrition facts ------------------------------------------
