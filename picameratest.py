@@ -116,7 +116,11 @@ try:
                                                                                                               apikey))
                     (response.content.decode("utf-8"))
 
+
                     content = response.content.decode("utf-8")
+                    if not content:
+                        continue
+
                     fooddata = json.loads(content)
 
                     if len(fooddata['parsed']) == 0:
