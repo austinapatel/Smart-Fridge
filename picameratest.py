@@ -93,26 +93,24 @@ for i in range(len(names)):
     for label in labels:
         print(label.description)
 
-
-    # get nutrition facts ------------------------------------------
-
-    linkfood = labels[2].description.lower()
-
-    image_label_list.append(linkfood)
-
-    appid = "01cf97dd"
-    apikey = "b920660a822e1fddc5b10bdf50c890cf"
-    test = "https://api.edamam.com/api/food-database/parser?ingr=apple&app_id=01cf97dd&app_key=b920660a822e1fddc5b10bdf50c890cf"
-
-    response = requests.get("https://api.edamam.com/api/food-database/parser?ingr={}&app_id={}&app_key={}".format(linkfood, appid, apikey))
-    (response.content.decode("utf-8"))
-
-    content = response.content.decode("utf-8")
-    fooddata = json.loads(content)
-
-
     try:
+        # get nutrition facts ------------------------------------------
 
+        linkfood = labels[2].description.lower()
+
+        image_label_list.append(linkfood)
+
+        appid = "01cf97dd"
+        apikey = "b920660a822e1fddc5b10bdf50c890cf"
+        test = "https://api.edamam.com/api/food-database/parser?ingr=apple&app_id=01cf97dd&app_key=b920660a822e1fddc5b10bdf50c890cf"
+
+        response = requests.get(
+            "https://api.edamam.com/api/food-database/parser?ingr={}&app_id={}&app_key={}".format(linkfood, appid,
+                                                                                                  apikey))
+        (response.content.decode("utf-8"))
+
+        content = response.content.decode("utf-8")
+        fooddata = json.loads(content)
 
         nutrientdata = fooddata["parsed"][0]["food"]["nutrients"]
         food = fooddata["parsed"][0]["food"]["label"]
@@ -257,6 +255,7 @@ k = Key(bucket)
 k.key = textfilename
 k.set_contents_from_filename(textpath, cb=percent_cb, num_cb=10)
 print('done')
+print(str(image_label_list))
 
 
 pause()
