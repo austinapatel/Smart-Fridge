@@ -1,10 +1,72 @@
-# Sympathy Snake Alexa skill created by Austin Patel
-
 WELCOME_SPEECH = 'What would you like to know?'
 
-HELP_INTENT, CANCEL_INTENT, STOP_INTENT, CONTENT_INTENT = 'AMAZON.HelpIntent', 'AMAZON.CancelIntent', 'AMAZON.StopIntent', 'content'
+HELP_INTENT, CANCEL_INTENT, STOP_INTENT, CONTENT_INTENT, NUTRITION_INTENT, EXPIRATION_INTENT = 'AMAZON.HelpIntent', 'AMAZON.CancelIntent', 'AMAZON.StopIntent', 'content', 'nutrition', 'expiration'
 
 LAUNCH_REQUEST, INTENT_REQUEST, SESSION_ENDED_REQUEST = 'LaunchRequest', 'IntentRequest', 'SessionEndedRequest'
+
+expirations = {'apple': 30, 'tomato': 14, 'orange': 30}
+
+
+def get_nutrition(item, d):
+    items = get_items(d)
+
+    return d[items.index(item)][item]
+
+
+def get_items(d):
+    items = []
+    for item in d:
+        items.append(list(item.keys())[0])
+
+    return items
+
+
+def get_data():
+    AWS_ACCESS_KEY_ID = 'AKIAIDYKVAQ2WHYAHJ6Q'
+    AWS_SECRET_ACCESS_KEY = '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'
+
+    bucket_name = 'smart-fridge-basehacks'
+
+    # conn = boto.connect_s3(AWS_ACCESS_KEY_ID,
+    #         AWS_SECRET_ACCESS_KEY)
+
+    # testfile = "image.jpg"
+    # print('Uploading %s to Amazon S3 bucket %s' % (testfile, bucket_name))
+
+    def percent_cb(complete, total):
+        sys.stdout.write('.')
+        sys.stdout.flush()
+
+    import boto3
+
+    # bucket = conn.get_bucket(bucket_name)
+
+    # # add new file
+    # k = Key(bucket)
+    # k.key = testfile
+    # k.set_contents_from_filename(testfile, cb=percent_cb, num_cb=10)
+
+    session = boto3.Session(
+        aws_access_key_id=AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+    )
+
+    s3 = session.resource('s3')
+    bucket = s3.Bucket(bucket_name)
+    body = 'no body found'
+
+    for obj in bucket.objects.all():
+        key = obj.key
+        body = obj.get()['Body'].read().decode("utf-8")
+
+    #
+    # key = obj.key
+    # body = obj.get()['Body'].read()
+    # print(body)
+
+    import json
+
+    return json.loads(body)
 
 
 # Speech
@@ -73,8 +135,46 @@ def handle_intent(event):
     """ Called when the user specifies an intent for this skill """
     if intent_name in name_to_handler:  # for no slot intents
         return name_to_handler[intent_name]()
+    elif intent_name == NUTRITION_INTENT:
+        d = get_data()
+        items = get_items(d)
+
+        item = event['request']['intent']['slots']['food']['value']
+
+        if item in items:
+            nutrition = get_nutrition(item, d)
+
+            # fat carbs calories protein
+
+            return say(
+                'A ' + item + " has {} calories, {} grams of fat, {} grams of carbs, and {} grams of protein".format(
+                    nutrition['calories'], nutrition['fat'], nutrition['carbs'], nutrition['protein']))
+        else:
+            return say('Nutrition facts for ' + item + " are not available.")
+    elif intent_name == EXPIRATION_INTENT:
+        d = get_data()
+        items = get_items(d)
+
+        item = event['request']['intent']['slots']['food']['value']
+
+        if item in items:
+            if item in expirations:
+                return say('your ' + item + " will expire in {} days".format(expirations[item]));
+            else:
+                return say('this item is in your refrigerator, but no expiration date data could be found.')
+        else:
+            return say('could not find expiration date information for ' + item)
     elif intent_name == CONTENT_INTENT:
-        return say('I currently do not know what is inside')
+        d = get_data()
+
+        items = get_items(d)
+
+        if len(items) == 1:
+            return say('there is only ' + items[0])
+        elif len(items) == 0:
+            return say('there is currently nothing recognized in the fridge')
+        else:
+            return say('there are ' + ', '.join(items[:len(items) - 1]) + ', and ' + items[len(items) - 1])
     else:
         return say(intent_name + ' could not be launched')
 
