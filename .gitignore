@@ -1,3 +1,5 @@
 .idea/
 *.xml
 *.json
+AWS_ACCESS_KEY_ID.txt
+AWS_SECRET_ACCESS_KEY.txt
