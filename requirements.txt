@@ -2,3 +2,4 @@ requests
 google.cloud
 google.cloud.vision
 google.cloud.storage
+boto3
